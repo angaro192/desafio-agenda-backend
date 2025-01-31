@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Agenda.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agenda.Controllers
@@ -12,10 +13,16 @@ namespace Agenda.Controllers
                 
         }
 
-        [HttpGet]
-        public IActionResult findAll()
+        [HttpPost]
+        public IActionResult create()
         {
             return Ok();
+        }
+
+
+        [HttpGet]
+        public List<Contato> findAll() {
+            return new List<Contato>();
         }
     }
 }

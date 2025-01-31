@@ -11,7 +11,7 @@ namespace Agenda.BLL
     {
         public ContatoService() { }
 
-        public bool SaveContact(Contato contato)
+        public bool create(Contato contato)
         {
             return false;
         }
