@@ -1,4 +1,5 @@
-﻿using Agenda.DAL.Repositories;
+﻿using Agenda.DAL.DTOs;
+using Agenda.DAL.Repositories;
 using Agenda.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -43,10 +44,20 @@ namespace Agenda.BLL
             return result;
         }
 
-        public List<Contact> GetContatoList()
+        public List<ContactDto> GetContatoList()
         {
             var result = _contactRepository.FindAll();
-            return result;
+            var pessoaDtos = result.Select(p => new ContactDto
+            {
+                Id = p.Id,
+                Favorite = p.Favorite,
+                TypeContact = p.TypeContact,
+                NamePessoa = p.Pessoa.Name,
+                Address = p.Pessoa.Address,
+                
+            }).ToList();
+
+            return pessoaDtos;
         }
 
         public Contact? GetContatoById(Guid id)

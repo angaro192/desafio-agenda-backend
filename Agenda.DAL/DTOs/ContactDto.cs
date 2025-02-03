@@ -13,5 +13,7 @@ namespace Agenda.DAL.DTOs
         public TypeContact TypeContact { get; set; }
         public string Contact { get; set; }
         public bool Favorite { get; set; }
+        public string NamePessoa { get; set; }
+        public Address Address { get; set; }
     }
 }
