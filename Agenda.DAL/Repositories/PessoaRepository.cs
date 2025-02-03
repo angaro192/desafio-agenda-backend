@@ -1,4 +1,5 @@
 ﻿using Agenda.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Agenda.DAL.Repositories
 {
@@ -18,13 +19,14 @@ namespace Agenda.DAL.Repositories
 
         public List<Pessoa> FindAll()
         {
-            List<Pessoa> pessoas = _context.Pessoas.ToList();
+            List<Pessoa> pessoas = _context.Pessoas.Include(p => p.Contact).ToList();
             return pessoas;
         }
 
         public Pessoa? FindById(Guid id)
         {
-            Pessoa? pessoa = _context.Pessoas.FirstOrDefault(x => x.Id == id);
+            //Pessoa? pessoa = _context.Pessoas.FirstOrDefault(x => x.Id == id);
+            Pessoa? pessoa = _context.Pessoas.Include(p => p.Contact).FirstOrDefault(x => x.Id == id);
             return pessoa;
         }
     }

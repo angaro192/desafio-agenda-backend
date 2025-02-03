@@ -1,4 +1,5 @@
-﻿using Agenda.DAL.Repositories;
+﻿using Agenda.DAL.DTOs;
+using Agenda.DAL.Repositories;
 using Agenda.Models;
 
 namespace Agenda.BLL
@@ -16,10 +17,25 @@ namespace Agenda.BLL
             return result;
         }
 
-        public List<Pessoa> GetPessoaList()
+        public List<PessoaDto> GetPessoaList()
         {
-            var result = _pessoaRepository.FindAll();
-            return result;
+            var pessoas = _pessoaRepository.FindAll();
+            var pessoaDtos = pessoas.Select(p => new PessoaDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Photo = p.Photo,
+                TypePicture = p.TypePicture,
+                Contact = p.Contact != null ? new ContactDto
+                {
+                    Id = p.Contact.Id,
+                    TypeContact = p.Contact.TypeContact,
+                    Contact = p.Contact.ContactName,
+                    Favorite = p.Contact.Favorite
+                } : null
+            }).ToList();
+
+            return pessoaDtos;
         }
     }
 }

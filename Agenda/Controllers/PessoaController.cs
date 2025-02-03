@@ -1,4 +1,5 @@
 ﻿using Agenda.BLL;
+using Agenda.DAL.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Agenda.Controllers
         }
 
         [HttpGet]
-        public IActionResult FindAll()
+        public ActionResult<List<PessoaDto>> FindAll()
         {
             var pessoaList = _pessoaService.GetPessoaList();
             return Ok(pessoaList);
